@@ -3,74 +3,73 @@ package com.demo.Moonvie.model.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Titulo")
+@Table(name = "titulo")
 public class Titulo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTitulo;
-    private String titulo;
-    private String tituloOriginal;
+    private Long id;
+
+    @Column(length = 150, nullable = false)
+    private String nome;
+
+    @Column(columnDefinition = "VARCHAR(MAX)")
     private String sinopse;
-    private int ano;
-    private String classificacao;
-    private String capa;
-    private String trailer;
+
+    @Column(length = 255, nullable = true)
+    private String descricao;
+
+    private Integer anoLancamento;
+
     private boolean codStatus;
 
-    public Long getIdTitulo() {
-        return idTitulo;
+    public Titulo() {
     }
-    public void setIdTitulo(Long idTitulo) {
-        this.idTitulo = idTitulo;
+
+    public Long getId() {
+        return id;
     }
-    public String getTitulo() {
-        return titulo;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+
+    public String getNome() {
+        return nome;
     }
-    public String getTituloOriginal() {
-        return tituloOriginal;
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
-    public void setTituloOriginal(String tituloOriginal) {
-        this.tituloOriginal = tituloOriginal;
-    }
+
     public String getSinopse() {
         return sinopse;
     }
+
     public void setSinopse(String sinopse) {
         this.sinopse = sinopse;
     }
-    public int getAno() {
-        return ano;
-    }
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
-    public String getClassificacao() {
-        return classificacao;
-    }
-    public void setClassificacao(String classificacao) {
-        this.classificacao = classificacao;
-    }
-    public String getCapa() {
-        return capa;
-    }
-    public void setCapa(String capa) {
-        this.capa = capa;
-    }
-    public String getTrailer() {
-        return trailer;
-    }
-    public void setTrailer(String trailer) {
-        this.trailer = trailer;
+
+    public String getDescricao() {
+        return descricao;
     }
 
-     public boolean isCodStatus() {
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Integer getAnoLancamento() {
+        return anoLancamento;
+    }
+
+    public void setAnoLancamento(Integer anoLancamento) {
+        this.anoLancamento = anoLancamento;
+    }
+
+    public boolean isCodStatus() {
         return codStatus;
     }
-    
+
     public void setCodStatus(boolean codStatus) {
         this.codStatus = codStatus;
     }

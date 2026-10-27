@@ -1,49 +1,64 @@
 package com.demo.Moonvie.controller;
 
 import com.demo.Moonvie.model.entity.Titulo;
-
+import com.demo.Moonvie.model.repository.TituloRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import java.util.Optional;
 
 @RestController
-@RequestMapping ("/api/v1/titulo")
+@RequestMapping("/api/v1/titulos")
 public class TituloController {
 
-    List<Titulo> titulos = new ArrayList<Titulo>();
+    @Autowired
+    private TituloRepository tituloRepository;
 
-    @GetMapping 
-    public List<Titulo> getTitulos() {
-        Titulo t1 = new Titulo();
-        t1.setIdTitulo(1L);
-        t1.setTitulo("The Witcher");
-        t1.setTituloOriginal(null);
-        t1.setSinopse("Geralt de Rívia, um caçador de monstros solitário, luta para encontrar seu lugar em um mundo onde as pessoas muitas vezes se mostram mais perversas do que as bestas.");
-        t1.setAno(2019);
-        t1.setClassificacao("16");
-        t1.setCapa("https://br.web.img3.acsta.net/pictures/19/12/17/15/51/4512950.jpg");
-        t1.setTrailer("https://www.youtube.com/watch?v=ndl1W4ltcmg");
+    @GetMapping
+    public ResponseEntity<List<Titulo>> findAll() {
+        return ResponseEntity.ok(tituloRepository.findAll());
+    }
 
-        Titulo t2 = new Titulo();
-        t2.setIdTitulo(2L);
-        t2.setTitulo("Breaking Bad");
-        t2.setTituloOriginal(null);
-        t2.setSinopse("Um professor de química do ensino médio diagnosticado com câncer de pulmão inoperável se volta para a fabricação e venda de metanfetamina para garantir o futuro financeiro de sua família.");
-        t2.setAno(2008);
-        t2.setClassificacao("18");
-        t2.setCapa("https://br.web.img3.acsta.net/pictures/19/12/17/15/51/4512950.jpg");
-        t2.setTrailer("https://www.youtube.com/watch?v=ndl1W4ltcmg");
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> findById(@PathVariable Long id) {
+        Optional<Titulo> titulo = tituloRepository.findById(id);
+        if (titulo.isPresent()) {
+            return ResponseEntity.ok(titulo.get());
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Título não encontrado com o ID: " + id);
+    }
 
-        titulos.add(t1);
-        titulos.add(t2);
+    @PostMapping
+    public ResponseEntity<Titulo> save(@RequestBody Titulo titulo) {
+        Titulo novoTitulo = tituloRepository.save(titulo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoTitulo);
+    }
 
-        return titulos;
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody Titulo tituloAtualizado) {
+        Optional<Titulo> tituloExistente = tituloRepository.findById(id);
+        if (tituloExistente.isPresent()) {
+            Titulo titulo = tituloExistente.get();
+            titulo.setNome(tituloAtualizado.getNome());
+            titulo.setSinopse(tituloAtualizado.getSinopse());
+            titulo.setDescricao(tituloAtualizado.getDescricao());
+            titulo.setAnoLancamento(tituloAtualizado.getAnoLancamento());
+            titulo.setCodStatus(tituloAtualizado.isCodStatus());
+            return ResponseEntity.ok(tituloRepository.save(titulo));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Título não encontrado para atualização.");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        Optional<Titulo> titulo = tituloRepository.findById(id);
+        if (titulo.isPresent()) {
+            tituloRepository.delete(titulo.get());
+            return ResponseEntity.ok("Título excluído com sucesso.");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Título não encontrado para exclusão.");
     }
 }

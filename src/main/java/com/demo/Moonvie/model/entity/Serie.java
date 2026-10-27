@@ -2,10 +2,16 @@ package com.demo.Moonvie.model.entity;
 
 import jakarta.persistence.*;
 
+@Entity
+@Table(name = "serie")
 public class Serie {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSerie;
+    @Column(length = 255, nullable = true)
     private String elenco;
+    @Column(length = 50, nullable = true)
     private String status;
     private boolean codStatus;
  

@@ -1,47 +1,61 @@
 package com.demo.Moonvie.controller;
 
 import com.demo.Moonvie.model.entity.Filme;
-
+import com.demo.Moonvie.model.repository.FilmeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
 @RestController
-@RequestMapping("/api/v1/filme")
+@RequestMapping("/api/v1/filmes")
 public class FilmeController {
 
-    List<Filme> filmes = new ArrayList<Filme>();
+    @Autowired
+    private FilmeRepository filmeRepository;
 
     @GetMapping
-    public List<Filme> getFilmes() {
-        Filme f1 = new Filme();
-        f1.setIdFilme(1L);
-        f1.setTitulo("Inception");
-        f1.setDuracao(148);
-        f1.setDiretor("Christopher Nolan");
+    public ResponseEntity<List<Filme>> findAll() {
+        return ResponseEntity.ok(filmeRepository.findAll());
+    }
 
-        Filme f2 = new Filme();
-        f2.setIdFilme(2L);
-        f2.setTitulo("The Matrix");
-        f2.setDuracao(136);
-        f2.setDiretor("Lana Wachowski, Lilly Wachowski");
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> findById(@PathVariable Long id) {
+        Filme filme = filmeRepository.findById(id).orElse(null);
+        if (filme != null) {
+            return ResponseEntity.ok(filme);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Filme não encontrado com o ID: " + id);
+    }
 
-        Filme f3 = new Filme();
-        f3.setIdFilme(3L);
-        f3.setTitulo("The Godfather");
-        f3.setDuracao(175);
-        f3.setDiretor("Francis Ford Coppola");
+    @PostMapping
+    public ResponseEntity<Filme> save(@RequestBody Filme filme) {
+        Filme novoFilme = filmeRepository.save(filme);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoFilme);
+    }
 
-        filmes.add(f1);
-        filmes.add(f2);
-        filmes.add(f3);
-        return filmes;
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody Filme atualizado) {
+        Filme existente = filmeRepository.findById(id).orElse(null);
+        if (existente != null) {
+            existente.setTitulo(atualizado.getTitulo());
+            existente.setDuracao(atualizado.getDuracao());
+            existente.setDiretor(atualizado.getDiretor());
+            existente.setCodStatus(atualizado.isCodStatus());
+            return ResponseEntity.ok(filmeRepository.save(existente));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Filme não encontrado para atualização.");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        Filme filme = filmeRepository.findById(id).orElse(null);
+        if (filme != null) {
+            filmeRepository.delete(filme);
+            return ResponseEntity.ok("Filme excluído com sucesso.");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Filme não encontrado para exclusão.");
     }
 }

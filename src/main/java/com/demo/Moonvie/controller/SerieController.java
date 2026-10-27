@@ -1,46 +1,60 @@
 package com.demo.Moonvie.controller;
 
 import com.demo.Moonvie.model.entity.Serie;
-
+import com.demo.Moonvie.model.repository.SerieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
 @RestController
-@RequestMapping("/api/v1/serie")
+@RequestMapping("/api/v1/series")
 public class SerieController {
 
-    List<Serie> series = new ArrayList<Serie>();
+    @Autowired
+    private SerieRepository serieRepository;
 
     @GetMapping
-    public List<Serie> getSeries() {
-        Serie s1 = new Serie();
-        s1.setIdSerie(1L);
-        s1.setElenco("Elenco da Série 1");
-        s1.setStatus("Em andamento");
-
-        Serie s2 = new Serie();
-        s2.setIdSerie(2L);
-        s2.setElenco("Elenco da Série 2");
-        s2.setStatus("Finalizada");
-        
-        Serie s3 = new Serie();
-        s3.setIdSerie(3L);
-        s3.setElenco("Elenco da Série 3");
-        s3.setStatus("Em andamento");
-
-        series.add(s1);
-        series.add(s2);
-        series.add(s3);
-        
-        return series;
+    public ResponseEntity<List<Serie>> findAll() {
+        return ResponseEntity.ok(serieRepository.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> findById(@PathVariable Long id) {
+        Serie serie = serieRepository.findById(id).orElse(null);
+        if (serie != null) {
+            return ResponseEntity.ok(serie);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Série não encontrada com o ID: " + id);
+    }
+
+    @PostMapping
+    public ResponseEntity<Serie> save(@RequestBody Serie serie) {
+        Serie novaSerie = serieRepository.save(serie);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novaSerie);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody Serie atualizada) {
+        Serie existente = serieRepository.findById(id).orElse(null);
+        if (existente != null) {
+            existente.setElenco(atualizada.getElenco());
+            existente.setStatus(atualizada.getStatus());
+            existente.setCodStatus(atualizada.isCodStatus());
+            return ResponseEntity.ok(serieRepository.save(existente));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Série não encontrada para atualização.");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        Serie serie = serieRepository.findById(id).orElse(null);
+        if (serie != null) {
+            serieRepository.delete(serie);
+            return ResponseEntity.ok("Série excluída com sucesso.");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Série não encontrada para exclusão.");
+    }
 }

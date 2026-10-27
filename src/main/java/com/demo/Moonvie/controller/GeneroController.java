@@ -1,46 +1,62 @@
 package com.demo.Moonvie.controller;
 
 import com.demo.Moonvie.model.entity.Genero;
-
+import com.demo.Moonvie.model.repository.GeneroRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import java.util.Optional;
 
 @RestController
-@RequestMapping ("/api/v1/genero")
+@RequestMapping("/api/v1/generos")
 public class GeneroController {
 
-    List<Genero> generos = new ArrayList<Genero>();
+    @Autowired
+    private GeneroRepository generoRepository;
 
     @GetMapping
-    public List<Genero> getGeneros() {
-        Genero g1 = new Genero();
-        g1.setIdGenero(1L);
-        g1.setNome("Ação");
-        g1.setDescricao("Filmes de ação são caracterizados por cenas emocionantes, perseguições, lutas e explosões, mantendo o público em suspense e entretido.");
-
-        Genero g2 = new Genero();
-        g2.setIdGenero(2L);
-        g2.setNome("Comédia");
-        g2.setDescricao("Filmes de comédia têm como objetivo principal provocar risadas e entretenimento, explorando situações engraçadas, diálogos espirituosos e personagens cômicos.");
-
-        Genero g3 = new Genero();
-        g3.setIdGenero(3L);
-        g3.setNome("Drama");
-        g3.setDescricao("Filmes de drama exploram emoções profundas, conflitos humanos e situações");
-
-        generos.add(g1);
-        generos.add(g2);
-        generos.add(g3);
-        
-        return generos;
+    public ResponseEntity<List<Genero>> findAll() {
+        return ResponseEntity.ok(generoRepository.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> findById(@PathVariable Long id) {
+        Optional<Genero> genero = generoRepository.findById(id);
+        if (genero.isPresent()) {
+            return ResponseEntity.ok(genero.get());
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Gênero não encontrado com o ID: " + id);
+    }
+
+    @PostMapping
+    public ResponseEntity<Genero> save(@RequestBody Genero genero) {
+        Genero novoGenero = generoRepository.save(genero);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoGenero);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody Genero generoAtualizado) {
+        Optional<Genero> generoExistente = generoRepository.findById(id);
+        if (generoExistente.isPresent()) {
+            Genero genero = generoExistente.get();
+            genero.setNome(generoAtualizado.getNome());
+            genero.setDescricao(generoAtualizado.getDescricao());
+            genero.setCodStatus(generoAtualizado.isCodStatus());
+            return ResponseEntity.ok(generoRepository.save(genero));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Gênero não encontrado para atualização.");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        Optional<Genero> genero = generoRepository.findById(id);
+        if (genero.isPresent()) {
+            generoRepository.delete(genero.get());
+            return ResponseEntity.ok("Gênero excluído com sucesso.");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Gênero não encontrado para exclusão.");
+    }
 }

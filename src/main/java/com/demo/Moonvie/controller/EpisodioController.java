@@ -1,49 +1,61 @@
 package com.demo.Moonvie.controller;
 
 import com.demo.Moonvie.model.entity.Episodio;
-
+import com.demo.Moonvie.model.repository.EpisodioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-
 @RestController
-@RequestMapping("/api/v1/episodio")
+@RequestMapping("/api/v1/episodios")
 public class EpisodioController {
 
-    List<Episodio> episodios = new ArrayList<Episodio>();
+    @Autowired
+    private EpisodioRepository episodioRepository;
 
     @GetMapping
-    public List<Episodio> getEpisodios() {
-        Episodio e1 = new Episodio();
-        e1.setIdEpisodio(1L);
-        e1.setTitulo("Pilot");
-        e1.setDuracao(42);
-        e1.setNumero(1);
-
-        Episodio e2 = new Episodio();
-        e2.setIdEpisodio(2L);
-        e2.setTitulo("The One Where It All Began");
-        e2.setDuracao(45);
-        e2.setNumero(2);
-
-        Episodio e3 = new Episodio();
-        e3.setIdEpisodio(3L);
-        e3.setTitulo("The One with the Blackout");
-        e3.setDuracao(44);
-        e3.setNumero(3);
-
-        episodios.add(e1);
-        episodios.add(e2);
-        episodios.add(e3);
-        
-        return episodios;
+    public ResponseEntity<List<Episodio>> findAll() {
+        return ResponseEntity.ok(episodioRepository.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> findById(@PathVariable Long id) {
+        Episodio episodio = episodioRepository.findById(id).orElse(null);
+        if (episodio != null) {
+            return ResponseEntity.ok(episodio);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Episódio não encontrado com o ID: " + id);
+    }
+
+    @PostMapping
+    public ResponseEntity<Episodio> save(@RequestBody Episodio episodio) {
+        Episodio novoEpisodio = episodioRepository.save(episodio);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoEpisodio);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody Episodio atualizado) {
+        Episodio existente = episodioRepository.findById(id).orElse(null);
+        if (existente != null) {
+            existente.setNumero(atualizado.getNumero());
+            existente.setTitulo(atualizado.getTitulo());
+            existente.setDuracao(atualizado.getDuracao());
+            existente.setCodStatus(atualizado.isCodStatus());
+            return ResponseEntity.ok(episodioRepository.save(existente));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Episódio não encontrado para atualização.");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        Episodio episodio = episodioRepository.findById(id).orElse(null);
+        if (episodio != null) {
+            episodioRepository.delete(episodio);
+            return ResponseEntity.ok("Episódio excluído com sucesso.");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Episódio não encontrado para exclusão.");
+    }
 }

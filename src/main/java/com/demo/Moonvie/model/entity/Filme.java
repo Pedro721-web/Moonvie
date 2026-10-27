@@ -2,11 +2,18 @@ package com.demo.Moonvie.model.entity;
 
 import jakarta.persistence.*;
 
+@Entity
+@Table(name = "filme")
 public class Filme {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFilme;
+    @Column(length = 150, nullable = false)
     private String titulo;
+    @Column(nullable = true)
     private int duracao;
+    @Column(length = 100, nullable = true)
     private String diretor;
     private boolean codStatus;
     
