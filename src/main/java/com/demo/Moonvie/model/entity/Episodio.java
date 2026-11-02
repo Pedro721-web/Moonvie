@@ -8,47 +8,68 @@ public class Episodio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEpisodio;
-    @Column(nullable = false)
-    private int numero;
-    @Column(length = 150, nullable = false)
-    private String titulo;
-    @Column(nullable = true)
-    private int duracao;
+    private Long id;
+
+    private String nome;
+
+    @Column(name = "duracao")
+    private Integer duracao; 
+
+    private Integer numero;
+
+    @Column(name = "cod_status")
     private boolean codStatus;
 
-  
-    public Long getIdEpisodio() {
-        return idEpisodio;
+    @ManyToOne
+    @JoinColumn(name = "temporada_id", nullable = false)
+    private Temporada temporada;
+
+    // Getters e Setters
+    public Long getId() {
+        return id;
     }
-    public void setIdEpisodio(Long idEpisodio) {
-        this.idEpisodio = idEpisodio;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public int getNumero() {
-        return numero;
+
+    public String getNome() {
+        return nome;
     }
-    public void setNumero(int numero) {
-        this.numero = numero;
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
-    public String getTitulo() {
-        return titulo;
+
+    public Integer getDuracao() {
+        return duracao; 
     }
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-    public int getDuracao() {
-        return duracao;
-    }
-    public void setDuracao(int duracao) {
+
+    public void setDuracao(Integer duracao) {
         this.duracao = duracao;
     }
-    
-      public boolean isCodStatus() {
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public boolean isCodStatus() {
         return codStatus;
     }
-    
+
     public void setCodStatus(boolean codStatus) {
         this.codStatus = codStatus;
     }
 
+    public Temporada getTemporada() {
+        return temporada;
+    }
+
+    public void setTemporada(Temporada temporada) {
+        this.temporada = temporada;
+    }
 }

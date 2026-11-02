@@ -9,19 +9,14 @@ public class Classifica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false)
     private Long idUsuario;
-
     @Column(nullable = false)
     private Long idTitulo;
-
     @Column(nullable = true)
     private double nota;
-
     @Column(length = 500, nullable = true)
     private String comentario;
-
     private boolean codStatus;
 
     public Classifica() {

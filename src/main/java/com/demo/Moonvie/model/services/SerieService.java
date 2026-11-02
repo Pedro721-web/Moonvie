@@ -28,9 +28,13 @@ public class SerieService {
     public Serie update(Long id, Serie serieAtualizada) {
         Serie serieExistente = serieRepository.findById(id).orElse(null);
         if (serieExistente != null) {
+            serieExistente.setTotalTemporadas(serieAtualizada.getTotalTemporadas());
             serieExistente.setElenco(serieAtualizada.getElenco());
             serieExistente.setStatus(serieAtualizada.getStatus());
             serieExistente.setCodStatus(serieAtualizada.isCodStatus());
+            if (serieAtualizada.getTitulo() != null) {
+                serieExistente.setTitulo(serieAtualizada.getTitulo());
+            }
             return serieRepository.save(serieExistente);
         }
         return null;

@@ -8,18 +8,18 @@ public class Genero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idGenero;
+    private Long id;
     @Column(length = 100, nullable = false)
     private String nome;
     @Column(length = 255, nullable = true)
     private String descricao;
     private boolean codStatus;
  
-    public Long getIdGenero() {
-        return idGenero;
+    public Long getId() {
+        return id;
     }
-    public void setIdGenero(Long idGenero) {
-        this.idGenero = idGenero;
+    public void setId(Long id) {
+        this.id = id;
     }
     public String getNome() {
         return nome;

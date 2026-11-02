@@ -29,9 +29,14 @@ public class EpisodioService {
         Episodio episodioExistente = episodioRepository.findById(id).orElse(null);
         if (episodioExistente != null) {
             episodioExistente.setNumero(episodioAtualizado.getNumero());
-            episodioExistente.setTitulo(episodioAtualizado.getTitulo());
+            episodioExistente.setNome(episodioAtualizado.getNome());
             episodioExistente.setDuracao(episodioAtualizado.getDuracao());
             episodioExistente.setCodStatus(episodioAtualizado.isCodStatus());
+            
+            if (episodioAtualizado.getTemporada() != null) {
+                episodioExistente.setTemporada(episodioAtualizado.getTemporada());
+            }
+            
             return episodioRepository.save(episodioExistente);
         }
         return null;

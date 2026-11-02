@@ -29,7 +29,7 @@ public class FilmeService {
         Filme filmeExistente = filmeRepository.findById(id).orElse(null);
         if (filmeExistente != null) {
             filmeExistente.setTitulo(filmeAtualizado.getTitulo());
-            filmeExistente.setDuracao(filmeAtualizado.getDuracao());
+            filmeExistente.setDuracaoMinutos(filmeAtualizado.getDuracaoMinutos());
             filmeExistente.setDiretor(filmeAtualizado.getDiretor());
             filmeExistente.setCodStatus(filmeAtualizado.isCodStatus());
             return filmeRepository.save(filmeExistente);

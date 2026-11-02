@@ -9,18 +9,13 @@ public class Titulo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(length = 150, nullable = false)
     private String nome;
-
     @Column(columnDefinition = "VARCHAR(MAX)")
     private String sinopse;
-
     @Column(length = 255, nullable = true)
     private String descricao;
-
     private Integer anoLancamento;
-
     private boolean codStatus;
 
     public Titulo() {

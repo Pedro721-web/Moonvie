@@ -41,7 +41,7 @@ public class FilmeController {
         Filme existente = filmeRepository.findById(id).orElse(null);
         if (existente != null) {
             existente.setTitulo(atualizado.getTitulo());
-            existente.setDuracao(atualizado.getDuracao());
+            existente.setDuracaoMinutos(atualizado.getDuracaoMinutos());
             existente.setDiretor(atualizado.getDiretor());
             existente.setCodStatus(atualizado.isCodStatus());
             return ResponseEntity.ok(filmeRepository.save(existente));

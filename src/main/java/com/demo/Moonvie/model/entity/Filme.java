@@ -8,46 +8,58 @@ public class Filme {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idFilme;
-    @Column(length = 150, nullable = false)
-    private String titulo;
-    @Column(nullable = true)
-    private int duracao;
-    @Column(length = 100, nullable = true)
+    private Long id;
+
+    @Column(name = "duracao_minutos")
+    private Integer duracaoMinutos;
+
+    @Column(length = 150)
     private String diretor;
+
+    @Column(name = "cod_status")
     private boolean codStatus;
-    
-    public Long getIdFilme() {
-        return idFilme;
+
+    @ManyToOne
+    @JoinColumn(name = "titulo_id", nullable = false)
+    private Titulo titulo;
+
+    public Long getId() {
+        return id;
     }
-    public void setIdFilme(Long idFilme) {
-        this.idFilme = idFilme;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public String getTitulo() {
-        return titulo;
+
+    public Integer getDuracaoMinutos() {
+        return duracaoMinutos;
     }
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+
+    public void setDuracaoMinutos(Integer duracaoMinutos) {
+        this.duracaoMinutos = duracaoMinutos;
     }
-    public int getDuracao() {
-        return duracao;
-    }
-    public void setDuracao(int duracao) {
-        this.duracao = duracao;
-    }
+
     public String getDiretor() {
         return diretor;
     }
+
     public void setDiretor(String diretor) {
         this.diretor = diretor;
     }
 
-      public boolean isCodStatus() {
+    public boolean isCodStatus() {
         return codStatus;
     }
-    
+
     public void setCodStatus(boolean codStatus) {
         this.codStatus = codStatus;
     }
 
+    public Titulo getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(Titulo titulo) {
+        this.titulo = titulo;
+    }
 }

@@ -1,7 +1,7 @@
 package com.demo.Moonvie.controller;
 
 import com.demo.Moonvie.model.entity.Episodio;
-import com.demo.Moonvie.model.repository.EpisodioRepository;
+import com.demo.Moonvie.model.services.EpisodioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,16 +14,16 @@ import java.util.List;
 public class EpisodioController {
 
     @Autowired
-    private EpisodioRepository episodioRepository;
+    private EpisodioService episodioService; // ✅ Injetando o Service em vez do Repository diretamente
 
     @GetMapping
     public ResponseEntity<List<Episodio>> findAll() {
-        return ResponseEntity.ok(episodioRepository.findAll());
+        return ResponseEntity.ok(episodioService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> findById(@PathVariable Long id) {
-        Episodio episodio = episodioRepository.findById(id).orElse(null);
+        Episodio episodio = episodioService.findById(id);
         if (episodio != null) {
             return ResponseEntity.ok(episodio);
         }
@@ -32,28 +32,24 @@ public class EpisodioController {
 
     @PostMapping
     public ResponseEntity<Episodio> save(@RequestBody Episodio episodio) {
-        Episodio novoEpisodio = episodioRepository.save(episodio);
+        Episodio novoEpisodio = episodioService.save(episodio);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoEpisodio);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody Episodio atualizado) {
-        Episodio existente = episodioRepository.findById(id).orElse(null);
-        if (existente != null) {
-            existente.setNumero(atualizado.getNumero());
-            existente.setTitulo(atualizado.getTitulo());
-            existente.setDuracao(atualizado.getDuracao());
-            existente.setCodStatus(atualizado.isCodStatus());
-            return ResponseEntity.ok(episodioRepository.save(existente));
+        Episodio episodioAtualizado = episodioService.update(id, atualizado);
+        if (episodioAtualizado != null) {
+            return ResponseEntity.ok(episodioAtualizado);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Episódio não encontrado para atualização.");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
-        Episodio episodio = episodioRepository.findById(id).orElse(null);
+        Episodio episodio = episodioService.findById(id);
         if (episodio != null) {
-            episodioRepository.delete(episodio);
+            episodioService.delete(id);
             return ResponseEntity.ok("Episódio excluído com sucesso.");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Episódio não encontrado para exclusão.");
