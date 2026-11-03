@@ -1,0 +1,887 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Moonvie
+meta:
+  id: wrk_36c8d3e10d564ff0bb6a130da2e1f18d
+  created: 1793124632587
+  modified: 1793124632587
+  description: ""
+collection:
+  - name: Genero
+    meta:
+      id: fld_c00a59f3badf4651ba8f025bb630b503
+      created: 1793584345112
+      modified: 1793584785205
+      sortKey: -1793584770288
+      description: ""
+    children:
+      - url: http://localhost:8080/api/v1/generos
+        name: Listar Todos os Gêneros
+        meta:
+          id: req_677cacc6c94f4b69922f19477ac691b6
+          created: 1793584380364
+          modified: 1793592345484
+          isPrivate: false
+          description: ""
+          sortKey: -1793584605439
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/generos
+        name: Salvar Novo Gênero
+        meta:
+          id: req_59368fe50b6c48c8b269a237e1767aec
+          created: 1793584477663
+          modified: 1793584654913
+          isPrivate: false
+          description: ""
+          sortKey: -1793584605364
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Ação",
+              "descricao": "Filmes e séries cheios de adrenalina e combates",
+              "codStatus": true
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/generos/1
+        name: Buscar Gênero por ID
+        meta:
+          id: req_2246b588826c4d98b878873e2dbf9bff
+          created: 1793584548039
+          modified: 1793655364791
+          isPrivate: false
+          description: ""
+          sortKey: -1793584605389
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/generos/2
+        name: Atualizar Gênero
+        meta:
+          id: req_c5197c25f8574e928e6407367f05a27a
+          created: 1793584605339
+          modified: 1793592269944
+          isPrivate: false
+          description: ""
+          sortKey: -1793584605339
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Ação e Aventura",
+              "descricao": "Filmes e séries de ação atualizados",
+              "codStatus": true
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/generos/2
+        name: Excluir Gênero
+        meta:
+          id: req_9900f2570aeb41d2a6357183a947b52a
+          created: 1793584687030
+          modified: 1793595646279
+          isPrivate: false
+          description: ""
+          sortKey: -1793584605239
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Titulo
+    meta:
+      id: fld_40ea2e7164764bd4b4bc0bd4fe35e529
+      created: 1793584770188
+      modified: 1793584770188
+      sortKey: -1793584770188
+      description: ""
+    children:
+      - url: http://localhost:8080/api/v1/titulos
+        name: Listar Todos os Títulos
+        meta:
+          id: req_4bbe0cf5e84144c392cb9cdd57ee1f13
+          created: 1793584790970
+          modified: 1793586415472
+          isPrivate: false
+          description: ""
+          sortKey: -1793585232588
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/titulos
+        name: Salvar Novo Título
+        meta:
+          id: req_50eeb9b5f4644f4ca1b9966cfc3df2f0
+          created: 1793584810680
+          modified: 1793592061101
+          isPrivate: false
+          description: ""
+          sortKey: -1793584810680
+        method: POST
+        body:
+          mimeType: application/json
+          text: >-
+            {
+              "nome": "Interestelar",
+              "sinopse": "As reservas da Terra estão chegando ao fim e um grupo de astronautas viaja através de um buraco de minhoca em busca de um novo lar.",
+              "descricao": "Filme de ficção científica épico",
+              "anoLancamento": 2014,
+              "codStatus": true
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/titulos/1
+        name: Buscar Título por ID
+        meta:
+          id: req_95f7e407e6124359b8106cb0724bf008
+          created: 1793585232488
+          modified: 1793655400292
+          isPrivate: false
+          description: ""
+          sortKey: -1793585232488
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/titulos/3
+        name: Atualizar Título
+        meta:
+          id: req_153d9bcf790e4a17a5714f30b4e33a1a
+          created: 1793585267963
+          modified: 1793650253022
+          isPrivate: false
+          description: ""
+          sortKey: -1793584810580
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Interestelar - Versão Estendida",
+              "sinopse": "As reservas da Terra estão chegando ao fim...",
+              "descricao": "Versão remasterizada",
+              "anoLancamento": 2014,
+              "codStatus": true
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/titulos/3
+        name: Excluir Título
+        meta:
+          id: req_fb84681494fb4906b30a605215a44d86
+          created: 1793585294318
+          modified: 1793595693147
+          isPrivate: false
+          description: ""
+          sortKey: -1793584810480
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Filme
+    meta:
+      id: fld_6ab618ee595942a19b1372a2b31fdc86
+      created: 1793585844760
+      modified: 1793587304971
+      sortKey: -1793585858971.5
+      description: ""
+    children:
+      - url: http://localhost:8080/api/v1/filmes/3
+        name: Excluir Filme
+        meta:
+          id: req_b965506390894c36b387b29633373c56
+          created: 1793586069841
+          modified: 1793595818159
+          isPrivate: false
+          description: ""
+          sortKey: -1793586069841
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/filmes/5
+        name: Atualizar Filme
+        meta:
+          id: req_ecf4bef9eea74e10a41e9f09d2a96ce3
+          created: 1793586075250
+          modified: 1793650308069
+          isPrivate: false
+          description: ""
+          sortKey: -1793586075250
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "duracaoMinutos": 175,
+              "titulo": {
+                "id": 1
+              }
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/filmes
+        name: Salvar Novo Filme
+        meta:
+          id: req_bd112022085c49d49cdd073c33bb140d
+          created: 1793586077531
+          modified: 1793595784312
+          isPrivate: false
+          description: ""
+          sortKey: -1793586077531
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "duracaoMinutos": 169,
+              "titulo": {
+                "id": 1
+              }
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/filmes
+        name: Buscar Filme por ID
+        meta:
+          id: req_628143717ba04a0bbff427d2cd590f8d
+          created: 1793586079556
+          modified: 1793650335797
+          isPrivate: false
+          description: ""
+          sortKey: -1793586079556
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/filmes
+        name: Listar Todos os Filmes
+        meta:
+          id: req_141fd5e649c44bedbc50ae59b7b7eae3
+          created: 1793586082024
+          modified: 1793594639005
+          isPrivate: false
+          description: ""
+          sortKey: -1793586082024
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Serie
+    meta:
+      id: fld_755368044be74d86914c5bc2c2bc1b4b
+      created: 1793585873183
+      modified: 1793585873183
+      sortKey: -1793585873183
+      description: ""
+    children:
+      - url: http://localhost:8080/api/v1/series/16
+        name: Excluir Série
+        meta:
+          id: req_c85ecc5c68a0459fb9eb53d506a25cc7
+          created: 1793586098971
+          modified: 1793651650147
+          isPrivate: false
+          description: ""
+          sortKey: -1793586098971
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/series/15
+        name: Atualizar Série
+        meta:
+          id: req_6ab1a9058c734b0caff129bba2a9a3bd
+          created: 1793586104520
+          modified: 1793650673608
+          isPrivate: false
+          description: ""
+          sortKey: -1793586104520
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "totalTemporadas": 6,
+              "titulo": {
+                "id": 1
+              }
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/series
+        name: Salvar Nova Série
+        meta:
+          id: req_c224e72e34fe413386c17504b3951728
+          created: 1793586132090
+          modified: 1793596650763
+          isPrivate: false
+          description: ""
+          sortKey: -1793586132090
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "totalTemporadas": 4,
+              "titulo": {
+                "id": 1
+              }
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/series
+        name: Buscar Série por ID
+        meta:
+          id: req_7f7d299f3082418ab7a4335f21882e8d
+          created: 1793586136739
+          modified: 1793587131879
+          isPrivate: false
+          description: ""
+          sortKey: -1793586136739
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/series
+        name: Listar Todas as Séries
+        meta:
+          id: req_cb973820b67048618ce14338b4d57b27
+          created: 1793586139238
+          modified: 1793595971980
+          isPrivate: false
+          description: ""
+          sortKey: -1793586139238
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Temporada
+    meta:
+      id: fld_495ffa1eb9374bed82e43cf9b0a4c7e6
+      created: 1793585893517
+      modified: 1793585893517
+      sortKey: -1793585893517
+      description: ""
+    children:
+      - url: http://localhost:8080/api/v1/temporadas/1
+        name: Excluir Temporada
+        meta:
+          id: req_e2836d5e60874553877b7059f3f6dfa1
+          created: 1793586101459
+          modified: 1793587564381
+          isPrivate: false
+          description: ""
+          sortKey: -1793586101459
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/temporadas/10
+        name: Atualizar Temporada
+        meta:
+          id: req_7e945b5b463b4763b37d549d34cf3047
+          created: 1793586161898
+          modified: 1793652640564
+          isPrivate: false
+          description: ""
+          sortKey: -1793586161898
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "numero": 2,
+              "serie": {
+                "id": 17
+              }
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/temporadas
+        name: Salvar Nova Temporada
+        meta:
+          id: req_5e92f636b016465ab176d9426e0959de
+          created: 1793586163850
+          modified: 1793655524621
+          isPrivate: false
+          description: ""
+          sortKey: -1793586163601.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "numero": 1,
+              "codStatus": true,
+              "serie": {
+                "id": 1
+              }
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/temporadas
+        name: Buscar Temporada por ID
+        meta:
+          id: req_6c56b7c1508a4443b587ad964428724f
+          created: 1793586165305
+          modified: 1793650780377
+          isPrivate: false
+          description: ""
+          sortKey: -1793586165305
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/temporadas
+        name: Listar Todas as Temporadas
+        meta:
+          id: req_4de2a66e5b264c669be796e7ecce21b7
+          created: 1793586167334
+          modified: 1793587542774
+          isPrivate: false
+          description: ""
+          sortKey: -1793586167334
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Episódio
+    meta:
+      id: fld_ba6aedbea8cc468a91133d25332817d0
+      created: 1793585921163
+      modified: 1793585921163
+      sortKey: -1793585921163
+      description: ""
+    children:
+      - url: http://localhost:8080/api/v1/episodios/11
+        name: Excluir Episódio
+        meta:
+          id: req_f680cfdcef9a4546974df756e18d20ea
+          created: 1793586180386
+          modified: 1793656947024
+          isPrivate: false
+          description: ""
+          sortKey: -1793586180386
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/episodios/13
+        name: Atualizar Episódio
+        meta:
+          id: req_b6d0cf20e1134ff9a2956fd7a8e7ed33
+          created: 1793586183847
+          modified: 1793656997643
+          isPrivate: false
+          description: ""
+          sortKey: -1793586183847
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "numero": 1,
+              "nome": "Piloto (Atualizado)",
+              "descricao": "Descrição atualizada",
+              "duracao": 50,
+              "codStatus": true,
+              "temporada": {
+                "id": 2
+              }
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/episodios
+        name: Salvar Novo Episódio
+        meta:
+          id: req_f45dbc9bd54f4314b1dfb053bcc3822c
+          created: 1793586187665
+          modified: 1793656377227
+          isPrivate: false
+          description: ""
+          sortKey: -1793586187665
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "numero": 1,
+              "nome": "Piloto",
+              "descricao": "Primeiro episódio da série",
+              "duracao": 45,
+              "codStatus": true,
+              "temporada": {
+                "id": 2
+              }
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/episodios
+        name: Buscar Episódio por ID
+        meta:
+          id: req_e2863198c4e7428986482d7c8a070700
+          created: 1793586189529
+          modified: 1793587627040
+          isPrivate: false
+          description: ""
+          sortKey: -1793586189529
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/episodios
+        name: Listar Todos os Episódios
+        meta:
+          id: req_f76e05f0a47546439952ab58812d573f
+          created: 1793586191737
+          modified: 1793587614119
+          isPrivate: false
+          description: ""
+          sortKey: -1793586191737
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Classifica
+    meta:
+      id: fld_eb460d8b5a534713ae6220b8da23694b
+      created: 1793585946502
+      modified: 1793585946502
+      sortKey: -1793585946502
+      description: ""
+    children:
+      - url: http://localhost:8080/api/v1/classificacoes/1
+        name: Excluir Classificação
+        meta:
+          id: req_952945efd7ed4bb89022cb69f32529b5
+          created: 1793586205844
+          modified: 1793587763654
+          isPrivate: false
+          description: ""
+          sortKey: -1793586205844
+        method: DELETE
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/classificacoes/1
+        name: Atualizar Classificação
+        meta:
+          id: req_0fc530fecdef4075a947733f8e78cd07
+          created: 1793586207788
+          modified: 1793657319596
+          isPrivate: false
+          description: ""
+          sortKey: -1793586207788
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "idUsuario": 1,
+              "nota": 10.0,
+              "comentario": "Comentário atualizado",
+              "codStatus": true,
+              "idTitulo": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/classificacoes
+        name: Salvar Nova Classificação
+        meta:
+          id: req_b4ea0033e0994e828bcfd8862ea8646c
+          created: 1793586209075
+          modified: 1793657233650
+          isPrivate: false
+          description: ""
+          sortKey: -1793586209075
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "idUsuario": 1,
+              "nota": 9.5,
+              "comentario": "Filme incrível!",
+              "codStatus": true,
+              "idTitulo": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/classificacoes
+        name: Buscar Classificação por ID
+        meta:
+          id: req_344b491541c749459fbbcecd38350a4f
+          created: 1793586210953
+          modified: 1793587741875
+          isPrivate: false
+          description: ""
+          sortKey: -1793586210953
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/v1/classificacoes
+        name: Listar Todas as Classificações
+        meta:
+          id: req_e6667a60dd8e40538d8c2b81f26c4fb6
+          created: 1793586212334
+          modified: 1793587733384
+          isPrivate: false
+          description: ""
+          sortKey: -1793586212334
+        method: GET
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_8bdf4e672732faaac338a21968d03366fe2b1e2e
+    created: 1793124632605
+    modified: 1793124632605
+environments:
+  name: Base Environment
+  meta:
+    id: env_8bdf4e672732faaac338a21968d03366fe2b1e2e
+    created: 1793124632601
+    modified: 1793124632601
+    isPrivate: false
